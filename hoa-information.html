@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Champions Overlook HOA Information" />
+    <title>HOA Information - Champions Overlook</title>
+    <link rel="icon" type="image/png" href="Champions Overlook Logo.png" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+        main {
+            margin-top: 150px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+
+        header {
+            position: fixed; 
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.80); 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            transition: background 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto; 
+            align-items: center;
+            padding: 1rem 2rem;
+            position: relative;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+
+        img.logo {
+            max-height: 150px;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px; 
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-family: 'Merriweather', serif;
+            color: #555;
+            transition: color 0.3s;
+            text-decoration: underline; 
+            text-underline-offset: 4px;
+            text-decoration-thickness: 2px;
+            font-size: clamp(0.9rem, 1.2vw + 0.4rem, 1.2rem);
+            padding: 6px 12px; 
+        }
+
+        .nav-links a:hover {
+            color: #2c3e50;
+        }
+
+        #menu-toggle {
+            display: none; 
+            background: none;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .subpage-hero {
+            position: relative;
+            height: 40vh; 
+            width: 100%;
+            overflow: hidden; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px; 
+        }
+        .hero-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9; 
+        min-height: 450px; 
+        max-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+        box-sizing: border-box;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 35%;
+            transform-origin: center 35%;
+            z-index: -1;
+            will-change: transform;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1; 
+            padding: 20px;
+            max-width: 800px;
+            
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(20px, 3.3vw, 45px); 
+            margin-top: 0.9rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            
+        }
+
+
+        #content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .info-card {
+            background: #f9f9f9;
+            border-left: 4px solid #2c3e50;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .download-btn:hover {
+            background: #1a252f;
+            color: white;
+        }
+
+        footer {
+            background: #f4f4f4;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                text-align: center;
+                padding: 1rem 0;
+                
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            #menu-toggle {
+                display: block; 
+            }
+
+            .hero-content h1 { font-size: 2rem; }
+        }
+
+        @media (min-width: 769px) {
+            .nav-links {
+                position: static;
+                justify-self: center; 
+                align-self: center;
+                display: flex;
+                gap: 36px;
+            }
+
+            .nav-links li {
+                display: inline-flex;
+                align-items: center;
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <img src="Champions Overlook Logo.png" alt="Champions Overlook Logo" class="logo">
+            
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="HOAWEBSITE">Home</a></li>
+
+                <li><a href="schools.html">Local Schools</a></li>
+                <li><a href="https://www.miltonga.gov/" target="_blank" rel="noopener noreferrer">City of Milton Website</a></li>
+                <li><a href="HOAWEBSITE#contact" style="font-weight: bold;">Contact Us</a></li>
+            </ul>
+
+            <button font-size="16px" id="menu-toggle" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="subpage-hero">
+            <img src="IMG_3696.jpg" 
+                 alt="Neighborhood trees and street" 
+                 class="hero-bg-image" 
+                 id="hero-image">
+            
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <h1 id="hero-title">HOA Information</h1>
+            </div>
+        </section>
+        
+
+        <section id="content">
+            <hr class="section-divider">
+            <h2>Board of Directors</h2>
+            <p>Our Homeowners Association is managed by a volunteer board of neighborhood residents elected to serve our community. The board meets regularly to discuss neighborhood maintenance, finances, and community concerns.
+                A yearly board meeting is held for all neighbors to review the HOA budget, projects, and future plans.
+            </p>
+            
+            <div class="info-card">
+                <strong>Homeowner's Dues:</strong>
+                <p> Dues for 2026 are $450 for the year.</p>
+            </div>
+            <hr class="section-divider">
+            <h2>Governing Documents</h2>
+            <p>To maintain the elegance and value of Champions Overlook, our community is governed by a set of Covenants, Conditions, and Restrictions (CC&Rs) and By-laws. All homeowners are required to adhere to these guidelines.</p>
+            
+            <a href="Champions Close Covenants-compressed.pdf" class="download-btn" download="Champions_Close_Covenants.pdf">Download Covenants (PDF)</a>
+<a href="Champions Close Bylaws-compressed.pdf" class="download-btn" style="margin-left: 10px;" download="Champions_Close_Bylaws.pdf">Download By-laws (PDF)</a>
+
+            <br>
+            <br><br>
+            <hr class="section-divider">
+            <h2>Architectural Review Committee (ARC)</h2>
+            <p>Planning to paint your home, add a fence, or make landscaping changes? Any exterior modifications to your home or property must be approved by the Architectural Review Committee prior to beginning work.</p>
+            <p>Please submit an ARC Request Form with your project details, materials, and contractor information.</p>
+            
+            <a href="architectural-review-committee-change-request-form.pdf" class="download-btn" download="ARC_Request_Form.pdf">Download ARC Request Form (PDF)</a>
+<hr class="section-divider">
+        </section>
+    </main>
+
+    <footer>
+        <p> Champion's Overlook Homeowners Association <span id="year"></span></p>
+    </footer>
+
+    <script>
+    const heroImage = document.getElementById('hero-image');
+    const heroText = document.querySelector('.hero-content'); 
+const yearElement = document.getElementById('year');
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY;
+        
+        if (scrollPos < 800) {
+            const scaleVal = 1 + (scrollPos * 0.0015);
+            const translateY = scrollPos * 0.2; 
+            const blurVal = scrollPos * 0.02; 
+            const opacityVal = Math.max(1 - (scrollPos * 0.003), 0);
+
+            if(heroImage) {
+                heroImage.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scaleVal})`;
+                heroImage.style.filter = `blur(${blurVal}px)`;
+            }
+            if(heroText) {
+                heroText.style.filter = `blur(${blurVal}px)`;
+                heroText.style.opacity = opacityVal;
+            }
+        } else {
+            if(heroImage) heroImage.style.filter = `blur(16px)`;
+            if(heroText) heroText.style.opacity = 0;
+        }
+    });
+</script>
+</body>
+</html>

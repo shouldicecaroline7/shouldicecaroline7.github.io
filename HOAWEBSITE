@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="HOA website" />
+    <title>Champions Overlook</title>
+
+    <link rel="icon" type="image/png" href="Champions Overlook Logo.png" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+
+        main {
+            margin-top: 150px;
+        }
+
+        header {
+            position: fixed; 
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.80);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto; 
+            align-items: center;
+            padding: 1rem 2rem;
+            position: relative;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+ 
+        img.logo {
+            max-height: 150px;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px; 
+        }
+
+        .nav-links a {
+            
+            font-weight: 600;
+            font-family: 'Merriweather', serif;
+            color: #555;
+            transition: color 0.3s;
+            text-decoration: underline; 
+            text-underline-offset: 4px;
+            text-decoration-thickness: 2px;
+            font-size: clamp(0.9rem, 1.2vw + 0.4rem, 1.2rem);
+            padding: 6px 12px; 
+        }
+
+        .nav-links a:hover {
+            color: #2c3e50;
+        }
+
+        #menu-toggle {
+            display: none; 
+            background: none;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+
+        .hero-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9; 
+            
+            min-height: 450px; 
+            
+            max-height: 70vh;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 35%;
+            transform-origin: center 35%;
+            z-index: -1;
+            will-change: transform; 
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative; 
+            z-index: 1; 
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(20px, 3.3vw, 45px); 
+            margin-top: 0.9rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .hero-content h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(36px, 6vw, 85px); 
+            margin-bottom: 0.2rem;
+            margin-top: 0.1rem; /* Pushes Milton, GA a bit further down */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+        }
+
+        .hero-content p {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(12px, 1.5vw, 24px); 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            margin-top: 0;
+        }
+
+
+        #content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        #content h2 {
+            text-align: center;
+            font-family: 'Italianno', cursive;
+            font-size: 2.4rem;
+            color: #464643;
+        }
+
+        footer {
+            background: #f4f4f4;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+
+        .contact-card h3 {
+            font-family: 'Italianno', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #464643;
+            margin-bottom: 15px;
+        }
+
+        .contact-card p {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            padding: 0 15px; 
+            color: #555; 
+            
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 20px auto 40px auto;
+            background-color: #f8f9fa; 
+            padding: 40px; 
+            border-radius: 8px; 
+            border: 1px solid #eaeaea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            box-sizing: border-box;
+        }
+
+        .contact-form label {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            color: #464643;
+            margin-bottom: -10px; 
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box; 
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus, 
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #2c3e50; 
+        }
+
+        .contact-form button {
+            background-color: hsl(90, 1%, 27%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s;
+            align-self: flex-start; 
+        }
+
+        .contact-form button:hover {
+            background-color: #1a252f;
+        }
+        /*phone stuff */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            #menu-toggle {
+                display: block; 
+            }
+
+            .hero-content h1 { font-size: 2rem; }
+        }
+            .hero-container {
+                min-height: 40vh; 
+                padding: 80px 20px;
+            }
+
+        @media (min-width: 769px) {
+            .nav-links {
+                position: static;
+                justify-self: center; 
+                align-self: center;
+                display: flex;
+                gap: 36px;
+                margin-bottom: 10px;
+            }
+
+            .nav-links li {
+                display: inline-flex;
+                align-items: center;
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <img src="Champions Overlook Logo.png" alt="Champions Overlook Logo" class="logo">
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="hoa-information.html">HOA Information</a></li>
+                <li><a href="schools.html">Local Schools</a></li>
+                <li><a href="https://www.miltonga.gov/" target="_blank" rel="noopener noreferrer">City of Milton Website</a></li>
+                <li><a href="#contact" style="font-weight: bold;">Contact Us</a></li>
+            </ul>
+
+            <button font-size="16px" id="menu-toggle" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-container">
+            <img src="IMG_3722.jpg" 
+                 alt="Beautiful Neighborhood Street" 
+                 class="hero-bg-image" 
+                 id="hero-image">
+            
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+
+                <h2 id="hero-subtitle">Champions Overlook</h2>
+                <p >Milton, GA</p>
+            </div>
+        </section>
+
+        <section id="content">
+            <hr class="section-divider">
+            <h2>Our Neighborhood:</h2>
+            <p>Set on a single tree-lined cul-de-sac street in North Fulton County, Champions Overlook is a community of 25 elegant custom estate homes. The predominantly traditional and European style homes built between 2001-2004 on 1+ acre lots,
+                 range in size from 5,000 to over 8,000 square feet, with all homes having 3 or more garages. Champions Overlook is adjacent to beautiful Bell Memorial Park, with baseball fields, walking trails, and playground areas.
+                  This neighborhood is close to the GA 400, and minutes from premier dining and shopping in Crabapple, Avalon, and downtown Alpharetta. Champions Overlook is located in the prestigous city of Milton, which has been ranked one of Georgia's safest
+                  cities. Close to top-rated schools, first class golf courses, and breathtaking natural parks and surroundings, Champions Overlook is an amazing place to call home.</p>
+            <hr class="section-divider">
+
+            <div class="contact-card">
+                <h3 id="contact">Contact Us:</h3>
+                <p>For Homeowners Association Inquiries, please use the form below:</p>
+                <hr class="section-divider" width=75%>
+                
+                <form id="hoa-contact-form" action="https://formspree.io/f/meebyoek" method="POST" class="contact-form">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit" id="submit-btn">Send Message</button>
+    <p id="form-status" style="margin-top: 10px; font-size: 0.9rem; font-weight: bold;"></p>
+</form>
+            </div>
+            
+
+        </section>
+    </main>
+
+    <footer>
+        <p> Champion's Overlook Homeowners Association <span id="year"></span></p>
+    </footer>
+
+    <script>
+        const contactForm = document.getElementById('hoa-contact-form');
+const submitBtn = document.getElementById('submit-btn');
+const formStatus = document.getElementById('form-status');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); 
+        
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Sending...';
+        submitBtn.style.backgroundColor = '#ccc';
+        submitBtn.style.cursor = 'not-allowed';
+        
+        const formData = new FormData(contactForm);
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                formStatus.style.color = '#2c3e50';
+                formStatus.innerText = 'Thanks for reaching out! Your message was sent.';
+                contactForm.reset(); 
+
+                let timeLeft = 60; 
+                
+                const countdown = setInterval(() => {
+                    timeLeft--;
+                    submitBtn.innerText = `Please wait ${timeLeft}s before sending another message`;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = 'Send Message';
+                        submitBtn.style.backgroundColor = ''; 
+                        submitBtn.style.cursor = 'pointer';
+                        formStatus.innerText = ''; 
+                    }
+                }, 1000);
+
+            } else {
+                formStatus.style.color = 'red';
+                formStatus.innerText = 'Oops! There was a problem sending your message.';
+                resetButton();
+            }
+        } catch (error) {
+            formStatus.style.color = 'red';
+            formStatus.innerText = 'Oops! Network error. Please try again later.';
+            resetButton();
+        }
+
+        function resetButton() {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'Send Message';
+            submitBtn.style.backgroundColor = ''; 
+            submitBtn.style.cursor = 'pointer';
+        }
+    });
+}
+        const yearElement = document.getElementById('year');
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', function () {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', String(!expanded));
+            
+            navLinks.classList.toggle('active');
+        });
+
+        const heroImage = document.getElementById('hero-image');
+        const heroText = document.querySelector('.hero-content'); 
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+            
+            if (scrollPos < 800) {
+                const scaleVal = 1 + (scrollPos * 0.0015);
+                const translateY = scrollPos * 0.2; 
+                const blurVal = scrollPos * 0.02; 
+                const opacityVal = Math.max(1 - (scrollPos * 0.003), 0);
+
+                heroImage.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scaleVal})`;
+                heroImage.style.filter = `blur(${blurVal}px)`;
+                heroText.style.filter = `blur(${blurVal}px)`;
+                heroText.style.opacity = opacityVal;
+            } else {
+                heroImage.style.filter = `blur(16px)`;
+                heroText.style.opacity = 0;
+            }
+        });
+    </script>
+</body>
+</html>>

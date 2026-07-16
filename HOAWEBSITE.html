@@ -3,15 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="HOA website" />
-    <title>Champions Overlook</title>
+    <!-- 1. UPDATED SEO DESCRIPTION -->
+    <meta name="description" content="Champions Overlook is a premier community of 25 elegant custom estate homes located in Milton, GA." />
+    
+    <!-- 2. UPDATED TITLE TAG -->
+    <title>Champions Overlook | Milton, GA Community</title>
 
-    <link rel="icon" type="image/png" href="Champions Overlook Logo.png" />
+    <!-- 3. WEB-SAFE FAVICON FILENAME -->
+    <link rel="icon" type="image/png" href="logo.png" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -67,7 +71,6 @@
         }
 
         .nav-links a {
-            
             font-weight: 600;
             font-family: 'Merriweather', serif;
             color: #555;
@@ -96,11 +99,8 @@
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 9; 
-            
             min-height: 450px; 
-            
             max-height: 70vh;
-            
             display: flex;
             align-items: center;
             justify-content: center;
@@ -141,17 +141,18 @@
 
         .hero-content h1 {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(20px, 3.3vw, 45px); 
-            margin-top: 0.9rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-        }
-
-        .hero-content h2 {
-            font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(36px, 6vw, 85px); 
             margin-bottom: 0.2rem;
             margin-top: 0.1rem; 
             text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+        }
+
+        .hero-content h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(20px, 3.3vw, 45px); 
+            margin-top: 0.9rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            font-weight: normal;
         }
 
         .hero-content p {
@@ -198,7 +199,6 @@
             font-size: 0.9rem;
             padding: 0 15px; 
             color: #555; 
-            
         }
 
         .contact-form {
@@ -257,7 +257,7 @@
         .contact-form button:hover {
             background-color: #1a252f;
         }
-        /*phone stuff */
+        
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -310,7 +310,7 @@
 
     <header>
         <nav aria-label="Main navigation">
-            <img src="Champions Overlook Logo.png" alt="Champions Overlook Logo" class="logo">
+            <img src="logo.png" alt="Champions Overlook Logo" class="logo">
             
             <ul class="nav-links" id="nav-links">
                 <li><a href="hoa-information.html">HOA Information</a></li>
@@ -333,9 +333,9 @@
             <div class="hero-overlay"></div>
 
             <div class="hero-content">
-
-                <h2 id="hero-subtitle">Champions Overlook</h2>
-                <p >Milton, GA</p>
+                <!-- 4. CHANGED HERO TITLE TO H1 FOR SEO -->
+                <h1 id="hero-title">Champions Overlook</h1>
+                <p>Milton, GA</p>
             </div>
         </section>
 
@@ -351,7 +351,7 @@
             <div class="contact-card">
                 <h3 id="contact">Contact Us:</h3>
                 <p>For Homeowners Association Inquiries, please use the form below:</p>
-                <hr class="section-divider" width=75%>
+                <hr class="section-divider" width="75%">
                 
                 <form id="hoa-contact-form" action="https://formspree.io/f/meebyoek" method="POST" class="contact-form">
     <label for="name">Name:</label>
@@ -479,5 +479,7 @@ if (contactForm) {
             }
         });
     </script>
+</body>
+</html>
 </body>
 </html>>

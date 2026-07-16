@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Champions Overlook Local Schools" />
+    <title>Local Schools - Champions Overlook</title>
+
+    <link rel="icon" type="image/png" href="Champions Overlook Logo.png" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+        main {
+            margin-top: 150px;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+
+        header {
+            position: fixed; 
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.80); 
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto; 
+            align-items: center;
+            padding: 1rem 2rem;
+            position: relative;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+
+        img.logo {
+            max-height: 150px;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Desktop Navigation Links */
+        .nav-links {
+            display: flex;
+            gap: 36px; 
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-family: 'Merriweather', serif;
+            color: #555;
+            transition: color 0.3s;
+            text-decoration: underline; 
+            text-underline-offset: 4px;
+            text-decoration-thickness: 2px;
+            font-size: clamp(0.9rem, 1.2vw + 0.4rem, 1.2rem);
+            padding: 6px 12px; 
+        }
+
+        .nav-links a:hover {
+            color: #2c3e50;
+        }
+
+        #menu-toggle {
+            display: none; 
+            background: none;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .subpage-hero {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9; 
+            min-height: 450px; 
+            max-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 35%;
+            transform-origin: center 35%;
+            z-index: -1;
+            will-change: transform; 
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); 
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1; 
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(20px, 4vw, 55px); 
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+
+        #content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .school-card {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 0;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            align-items: center;
+        }
+
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 20px 0; /* equal space above and below the divider */
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 1.1rem;
+            margin: 0 0 40px 0;
+            padding-bottom: 20px; /* extra padding below the intro */
+        }
+
+        .school-image-placeholder {
+            flex-shrink: 0;
+            width: 300px;
+            height: 200px;
+            background-color: #d3d3d3;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .school-image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .school-info {
+            flex-grow: 1;
+        }
+
+        .school-info h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .school-btn {
+            display: inline-block;
+            background: #2c3e50;
+            color: white;
+            padding: 8px 16px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .school-btn:hover {
+            background: #1a252f;
+            color: white;
+        }
+
+        .info-card {
+            background: #f9f9f9;
+            border-left: 4px solid #2c3e50;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        footer {
+            background: #f4f4f4;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            #menu-toggle {
+                display: block; 
+            }
+
+            .hero-content h1 { font-size: 2rem; }
+
+            .school-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .school-image-placeholder {
+                width: 100%; 
+            }
+        }
+
+        @media (min-width: 769px) {
+            .nav-links {
+                position: static;
+                justify-self: center; 
+                align-self: center;
+                display: flex;
+                gap: 36px;
+            }
+
+            .nav-links li {
+                display: inline-flex;
+                align-items: center;
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav aria-label="Main navigation">
+            <img src="Champions Overlook Logo.png" alt="Champions Overlook Logo" class="logo">
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="HOAWEBSITE">Home</a></li>
+                <li><a href="hoa-information.html">HOA Information</a></li>
+                <li><a href="https://www.miltonga.gov/" target="_blank" rel="noopener noreferrer">City of Milton Website</a></li>
+                <li><a href="HOAWEBSITE#contact" style="font-weight: bold;">Contact Us</a></li>
+            </ul>
+
+            <button font-size="16px" id="menu-toggle" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="subpage-hero">
+            <img src="Cambridge-High-School-in-Milton.png" 
+                 alt="Cambridge High School" 
+                 class="hero-bg-image" 
+                 id="hero-image">
+            
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <h1 id="hero-title">Local Schools</h1>
+            </div>
+        </section>
+
+        <section id="content">
+
+            <p class="intro-text">Champions Overlook is proud to be zoned for some of the top-rated public schools in Milton, Georgia:</p>
+
+            
+
+            <div class="school-card">
+                <div class="school-image-placeholder">
+                    <img src="summithill.JPG" alt="Elementary School Image Placeholder" onerror="this.style.display='none'; this.parentNode.innerHTML='[ 300x200 Image Placeholder ]'">
+                </div>
+                <div class="school-info">
+                    <h3>Summit Hill Elementary</h3>
+                    <p><strong>Grades:</strong> Pre-K - 5th</p>
+                    <p>Summit Hill Elementary provides a strong foundation for our youngest residents, focusing on academic excellence and character development in a supportive environment.</p>
+                    <a href="https://summithill.fultonschools.org/" target="_blank" class="school-btn">Visit Website</a>
+                </div>
+            </div>
+            <hr class="section-divider">
+            <div class="school-card">
+                <div class="school-image-placeholder">
+                    <img src="hopewell.JPG" alt="Middle School Image Placeholder" onerror="this.style.display='none'; this.parentNode.innerHTML='[ 300x200 Image Placeholder ]'">
+                </div>
+                <div class="school-info">
+                    <h3>Hopewell Middle School</h3>
+                    <p><strong>Grades:</strong> 6th - 8th</p>
+                    <p>Hopewell Middle School prepares students for the transition to high school with rigorous academics, diverse extracurricular activities, and a dedicated teaching staff.</p>
+                    <a href="https://hopewell.fultonschools.org/" target="_blank" class="school-btn">Visit Website</a>
+                </div>
+            </div>
+            <hr class="section-divider">
+<div class="school-card">
+                <div class="school-image-placeholder">
+                    <img src="cambridge1.png" alt="Cambridge High School" onerror="this.style.display='none'; this.parentNode.innerHTML='[ 300x200 Image Placeholder ]'">
+                </div>
+                <div class="school-info">
+                    <h3>Cambridge High School</h3>
+                    <p><strong>Grades:</strong> 9th - 12th</p>
+                    <p>Cambridge High School is consistently ranked among the top high schools in the state. It offers extensive Advanced Placement (AP) courses, championship athletics, and award-winning arts programs to set students up for success.</p>
+                    <a href="https://cambridge.fultonschools.org/" target="_blank" class="school-btn">Visit Website</a>
+                </div>
+            </div>
+            <hr class="section-divider">
+            <p>In addition to top-rated public schools, Milton is home to several prestigious private schools as well:
+            </p>
+            <div class="info-card">
+                <strong>Private School Options (Click for more information) :</strong>
+                <ul style="list-style-type:circle;">
+                    <li><a href="https://www.kingsridgecs.org/" target="_blank" class="school-btn">King's Ridge Christian School (Alpharetta) | Pre-K – 12</a></li>
+                    <li><a href="https://www.saintfrancisschools.com/" target="_blank" class="school-btn">Saint Francis Schools (Milton) | K – 12</a></li>
+                    <li><a href="https://www.millsprings.org/" target="_blank" class="school-btn">Mill Springs Academy (Milton) | Pre-K – 12</a></li>
+
+                </ul>
+            </div>
+            <footer>
+        <p> Champion's Overlook Homeowners Association <span id="year"></span></p>
+    </footer>
+            <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function () {
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', String(!expanded));
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        const heroImage = document.getElementById('hero-image');
+        const heroText = document.querySelector('.hero-content'); 
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+            
+            if (scrollPos < 800) {
+                const scaleVal = 1 + (scrollPos * 0.0015);
+                const translateY = scrollPos * 0.2; 
+                const blurVal = scrollPos * 0.02; 
+                const opacityVal = Math.max(1 - (scrollPos * 0.003), 0);
+
+                if(heroImage) {
+                    heroImage.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scaleVal})`;
+                    heroImage.style.filter = `blur(${blurVal}px)`;
+                }
+                if(heroText) {
+                    heroText.style.filter = `blur(${blurVal}px)`;
+                    heroText.style.opacity = opacityVal;
+                }
+            } else {
+                if(heroImage) heroImage.style.filter = `blur(16px)`;
+                if(heroText) heroText.style.opacity = 0;
+            }
+        });
+    </script>
+        </section>

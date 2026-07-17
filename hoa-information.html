@@ -307,23 +307,26 @@
     <script>
     const heroImage = document.getElementById('hero-image');
     const heroText = document.querySelector('.hero-content'); 
-const yearElement = document.getElementById('year');
-        if (yearElement) {
-            yearElement.textContent = new Date().getFullYear();
-        }
-    window.addEventListener('scroll', () => {
+    const yearElement = document.getElementById('year');
+    
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
 
-    /*TEST FOR DROP DOWN MENU FIX*/
+    /* DROP DOWN MENU FIX (Moved outside the scroll event) */
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
 
-        if (menuToggle && navLinks) {
-            menuToggle.addEventListener('click', function () {
-                const expanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', String(!expanded));
-                navLinks.classList.toggle('active');
-            });
-        }
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function () {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', String(!expanded));
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    /* SCROLL EVENT LOGIC */
+    window.addEventListener('scroll', () => {
         const scrollPos = window.scrollY;
         
         if (scrollPos < 800) {
